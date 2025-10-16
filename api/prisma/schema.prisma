@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  reports   Report[]
+  events    Event[]  @relation("EventUser")
+}
+
+model Report {
+  id        String   @id @default(cuid())
+  title     String   // Changed from 'name' to 'title' to match your code
+  eventType String?
+  createdAt DateTime @default(now())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Event {
+  id        String   @id @default(cuid())
+  timestamp DateTime @default(now())  // Changed from 'ts' to 'timestamp' to match your code
+  type      String
+  metadata  Json?    // Changed from 'props' to 'metadata' to match your code
+  userId    String
+  user      User?    @relation("EventUser", fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}

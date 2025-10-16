@@ -1,0 +1,25 @@
+{
+  "files": [],
+  "references": [
+    { "path": "shared/types" },
+    { "path": "shared/utils" },
+    { "path": "shared/ui" },
+    { "path": "api" },
+    { "path": "shell" },
+    { "path": "apps/dashboard" },
+    { "path": "apps/reports" },
+    { "path": "apps/collab" },
+    { "path": "scripts" }
+  ],
+  
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "target": "ES2022",
+    "skipLibCheck": true
+  }
+}
+

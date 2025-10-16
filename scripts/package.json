@@ -1,0 +1,11 @@
+{
+  "name": "@pulsegrid/scripts",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": { "seed": "tsx seed.ts", "ws:simulate": "tsx ws-simulate.ts" },
+  "dependencies": { "@prisma/client": "5.18.0", "dotenv": "16.4.5" },
+  "devDependencies": { "tsx": "4.19.2", "typescript": "5.6.3" }
+}
+
+
+

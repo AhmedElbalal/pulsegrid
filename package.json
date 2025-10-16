@@ -1,0 +1,20 @@
+{
+  "name": "pulsegrid",
+  "private": true,
+  "workspaces": [
+    "shared/*",
+    "apps/*",
+    "api"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "build:types": "npm run build --workspace=@pulsegrid/types",
+    "build:ui": "npm run build --workspace=@pulsegrid/ui",
+    "build:api": "npm run build --workspace=@pulsegrid/api",
+    "build:dashboard": "npm run build --workspace=@pulsegrid/app-dashboard",
+    "dev": "npm run dev --workspaces"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}

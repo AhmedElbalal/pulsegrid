@@ -1,0 +1,1 @@
+variable "fifo" { default = false }

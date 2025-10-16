@@ -1,0 +1,38 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  build_test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: pguser
+          POSTGRES_PASSWORD: pgpass
+          POSTGRES_DB: pulsegrid
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U pguser"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    env:
+      DATABASE_URL: postgresql://pguser:pgpass@localhost:5432/pulsegrid?schema=public
+      JWT_SECRET: ci_secret
+      CORS_ORIGIN: http://localhost:5173
+      PORT: 3001
+      VITE_API_URL: http://localhost:3001
+      VITE_SOCKET_URL: http://localhost:3001
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm ci
+      - run: npx prisma generate --schema=api/prisma/schema.prisma
+      - run: npx prisma migrate deploy --schema=api/prisma/schema.prisma
+      - run: npm run build
+      - run: npm run test
