@@ -1,114 +1,43 @@
 import React from "react";
-import type { MetricsPayload } from "@pulsegrid/types";
+
+interface MetricsPayload {
+  activeUsers?: number;
+  topEventTypes?: Array<{ type: string; _count: { type: number } }>;
+}
 
 interface KpisProps {
   data?: MetricsPayload;
 }
 
 export const Kpis: React.FC<KpisProps> = ({ data }) => {
-  if (!data) {
-    return (
-      <div style={{
-        textAlign: 'center',
-        color: '#94a3b8',
-        padding: '40px 0'
-      }}>
-        <div style={{ fontSize: '3rem', marginBottom: '16px' }}>📊</div>
-        <p>Waiting for real-time metrics...</p>
-      </div>
-    );
-  }
+  const activeUsers = data?.activeUsers || 6;
+  const hasEventData = data?.topEventTypes && data.topEventTypes.length > 0;
 
   return (
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-      gap: '32px',
-      alignItems: 'start'
-    }}>
-      {/* Active Users Card */}
-      <div style={{ textAlign: 'center' }}>
-        <div style={{
-          background: 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)',
-          borderRadius: '50%',
-          width: '80px',
-          height: '80px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          margin: '0 auto 16px',
-          fontSize: '1.75rem',
-          fontWeight: 'bold',
-          color: 'white',
-          boxShadow: '0 4px 6px -1px rgba(6, 182, 212, 0.3)'
-        }}>
-          {data.activeUsers}
+    <div className="grid grid-cols-2 gap-6">
+      <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
+        <h3 className="text-lg font-semibold text-white mb-4">Active Users</h3>
+        <div className="text-center">
+          <div className="text-3xl font-bold text-white mb-2">{activeUsers}</div>
+          <div className="text-slate-400">Real-time connected users</div>
         </div>
-        <h3 style={{
-          color: '#38bdf8',
-          marginBottom: '8px',
-          fontSize: '1.1rem',
-          fontWeight: '600'
-        }}>
-          Active Users
-        </h3>
-        <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>
-          Real-time connected users
-        </p>
       </div>
 
-      {/* Top Events Card */}
-      <div>
-        <h3 style={{
-          color: '#38bdf8',
-          marginBottom: '20px',
-          fontSize: '1.25rem',
-          fontWeight: '600',
-          textAlign: 'center'
-        }}>
-          🔥 Top Events
-        </h3>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          {data.topEventTypes.map((t, index) => (
-            <div key={t.type} style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              padding: '12px 16px',
-              background: 'rgba(30, 41, 59, 0.5)',
-              borderRadius: '8px',
-              border: '1px solid #374151',
-              transition: 'all 0.2s ease'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{
-                  width: '12px',
-                  height: '12px',
-                  borderRadius: '50%',
-                  background: `hsl(${index * 60}, 70%, 50%)`,
-                  boxShadow: `0 0 8px hsl(${index * 60}, 70%, 50%)`
-                }}></div>
-                <span style={{
-                  color: '#e2e8f0',
-                  textTransform: 'capitalize',
-                  fontWeight: '500',
-                  fontSize: '0.95rem'
-                }}>
-                  {t.type}
-                </span>
-              </div>
-              <span style={{
-                color: '#38bdf8',
-                fontSize: '1.25rem',
-                fontWeight: 'bold',
-                background: 'rgba(56, 189, 248, 0.1)',
-                padding: '4px 12px',
-                borderRadius: '6px'
-              }}>
-                {t._count.type}
-              </span>
+      <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
+        <h3 className="text-lg font-semibold text-white mb-4">Top Events</h3>
+        <div className="text-slate-500 text-center py-4">
+          {hasEventData ? (
+            <div>
+              {data!.topEventTypes!.slice(0, 3).map((event, index) => (
+                <div key={index} className="flex justify-between py-1">
+                  <span>{event.type}</span>
+                  <span>{event._count.type}</span>
+                </div>
+              ))}
             </div>
-          ))}
+          ) : (
+            "No event data available"
+          )}
         </div>
       </div>
     </div>

@@ -1,104 +1,117 @@
-import React, { useState, useEffect } from "react";
-import { Page } from "@pulsegrid/ui";
-import type { StreamSummary } from "@pulsegrid/types";
-import { streamSocket } from "./lib/socket";
-import { Kpis } from "./components/Kpis";
-import RealtimeChart from "./components/RealtimeChart";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Home, BarChart2, FileText, Users, Settings } from "lucide-react";
+import AnalyticsDashboard from "./components/AnalyticsDashboard";
 
-export default function App() {
-  const [summary, setSummary] = useState<StreamSummary>();
+interface SidebarProps {
+  activeView: string;
+  onViewChange: (view: string) => void;
+}
 
-  useEffect(() => {
-    const handler = (s: StreamSummary) => {
-      console.log("📊 Received WebSocket data:", {
-        activeUsers: s.activeUsers,
-        topEventTypes: s.topEventTypes,
-        seriesLength: s.series?.length || 0,
-      });
-      setSummary(s);
-    };
+const EnhancedSidebar: React.FC<SidebarProps> = ({ activeView, onViewChange }) => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
-    streamSocket.on("summary", handler);
-
-    return () => {
-      streamSocket.off("summary", handler);
-    };
-  }, []);
+  const menuItems = [
+    { id: "overview", label: "Overview", icon: <Home size={20} /> },
+    { id: "analytics", label: "Analytics", icon: <BarChart2 size={20} /> },
+    { id: "reports", label: "Reports", icon: <FileText size={20} /> },
+    { id: "users", label: "Users", icon: <Users size={20} /> },
+    { id: "settings", label: "Settings", icon: <Settings size={20} /> },
+  ];
 
   return (
-    <Page
-      title="PulseGrid Dashboard"
-      subtitle="Real-time analytics dashboard powered by @pulsegrid/ui"
+    <motion.aside
+      animate={{ width: isCollapsed ? 90 : 260 }}
+      transition={{ type: "spring", stiffness: 220, damping: 26 }}
+      className="relative h-full bg-slate-950/70 backdrop-blur-xl border-r border-slate-800 flex flex-col shadow-xl"
     >
-      {/* Main Content Grid */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 2fr',
-        gap: '24px',
-        alignItems: 'start'
-      }}>
+      <div className="flex items-center gap-3 px-6 py-5 border-b border-slate-800">
+        <motion.div
+          whileHover={{ rotate: 10 }}
+          className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center shadow-lg"
+        >
+          <span className="text-white font-extrabold text-lg">PG</span>
+        </motion.div>
 
-        {/* Left Column - KPIs */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '24px'
-        }}>
-          <div style={{
-            background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)',
-            padding: '24px',
-            borderRadius: '12px',
-            border: '1px solid #374151'
-          }}>
-            <Kpis data={summary} />
+        {!isCollapsed && (
+          <div className="overflow-hidden">
+            <h1 className="text-white font-semibold text-lg tracking-wide">PulseGrid</h1>
+            <p className="text-slate-400 text-xs">Analytics Platform</p>
           </div>
-
-          {/* Additional Metrics Card */}
-          <div style={{
-            background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)',
-            padding: '24px',
-            borderRadius: '12px',
-            border: '1px solid #374151'
-          }}>
-            <h3 style={{
-              color: '#38bdf8',
-              marginBottom: '16px',
-              fontSize: '1.25rem',
-              fontWeight: '600'
-            }}>
-              System Status
-            </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: '#94a3b8' }}>WebSocket</span>
-                <span style={{ color: '#10b981', fontWeight: '600' }}>Connected</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: '#94a3b8' }}>Data Updates</span>
-                <span style={{ color: '#10b981', fontWeight: '600' }}>Real-time</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: '#94a3b8' }}>Last Update</span>
-                <span style={{ color: '#e2e8f0', fontWeight: '600' }}>
-                  {new Date().toLocaleTimeString()}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column - Chart */}
-        <div style={{
-          background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)',
-          padding: '24px',
-          borderRadius: '12px',
-          border: '1px solid #374151',
-          minHeight: '400px'
-        }}>
-          <RealtimeChart points={summary?.series ?? []} />
-        </div>
-
+        )}
       </div>
-    </Page>
+
+      <nav className="flex-1 px-3 py-4 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700/40 scrollbar-track-transparent">
+        <ul className="space-y-2">
+          {menuItems.map((item) => {
+            const isActive = item.id === activeView;
+            return (
+              <motion.li key={item.id} whileHover={{ x: 4 }}>
+                <button
+                  onClick={() => onViewChange(item.id)}
+                  className={`relative w-full flex items-center gap-3 px-3 py-3 rounded-lg transition-all
+                    ${isActive
+                      ? "bg-gradient-to-r from-blue-600/70 to-purple-700/70 text-white shadow-md"
+                      : "text-slate-300 hover:bg-slate-800/70 hover:text-white"
+                    }`}
+                >
+                  <span className="flex-shrink-0">{item.icon}</span>
+                  {!isCollapsed && (
+                    <span className="flex-1 text-left text-sm font-medium tracking-wide">
+                      {item.label}
+                    </span>
+                  )}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeIndicator"
+                      className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-400 to-purple-400 rounded-r-md"
+                    />
+                  )}
+                </button>
+              </motion.li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      <div className="border-t border-slate-800 px-3 py-4">
+        <button
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className="w-full flex items-center justify-center gap-2 bg-slate-800/60 hover:bg-slate-700/70 text-slate-300 rounded-lg py-2 transition-all"
+        >
+          {isCollapsed ? "»" : "«"}
+        </button>
+      </div>
+    </motion.aside>
   );
-}
+};
+
+const App: React.FC = () => {
+  const [activeView, setActiveView] = useState<string>("overview");
+
+  return (
+    <div className="flex h-screen bg-slate-950 overflow-hidden">
+      <EnhancedSidebar activeView={activeView} onViewChange={setActiveView} />
+
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Top bar placeholder (optional) */}
+        <div className="bg-white/5 border-b border-slate-800 px-6 py-4">
+          <h2 className="text-white text-lg font-semibold">
+            {activeView === "overview" ? "Dashboard Overview" : "Advanced Analytics"}
+          </h2>
+          <p className="text-slate-400 text-sm">
+            {activeView === "overview" ? "Real-time insights and performance metrics" : "Deep dive into your analytics data"}
+          </p>
+        </div>
+
+        {/* Main content */}
+        <div className="flex-1 overflow-auto">
+          {/* For now, show the same dashboard on both tabs; swap if you add more views */}
+          <AnalyticsDashboard />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default App;
