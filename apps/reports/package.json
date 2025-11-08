@@ -2,8 +2,13 @@
   "name": "@pulsegrid/app-reports",
   "version": "1.0.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
-  "scripts": { "dev": "vite", "build": "vite build", "preview": "vite preview" },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "@pulsegrid/ui": "1.0.0",
     "@pulsegrid/utils": "1.0.0",
@@ -11,13 +16,10 @@
     "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "vite": "5.4.8",
-    "@originjs/vite-plugin-federation": "1.4.1",
-    "@types/react": "18.3.12",
-    "@types/react-dom": "18.3.1",
-    "typescript": "5.6.3"
+    "vite": "^5.4.8",
+    "@originjs/vite-plugin-federation": "^1.4.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "typescript": "^5.6.3"
   }
 }
-
-
-

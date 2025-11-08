@@ -1,17 +1,23 @@
 {
   "name": "pulsegrid",
+  "version": "1.0.0",
   "private": true,
   "workspaces": [
-    "shared/*",
-    "apps/*",
+    "shared/types",
+    "shared/utils",
+    "shared/ui",
+    "apps/dashboard",
+    "apps/reports",
     "api"
   ],
   "scripts": {
     "build": "npm run build --workspaces",
     "build:types": "npm run build --workspace=@pulsegrid/types",
     "build:ui": "npm run build --workspace=@pulsegrid/ui",
+    "build:utils": "npm run build --workspace=@pulsegrid/utils",
     "build:api": "npm run build --workspace=@pulsegrid/api",
     "build:dashboard": "npm run build --workspace=@pulsegrid/app-dashboard",
+    "build:reports": "npm run build --workspace=@pulsegrid/app-reports",
     "dev": "npm run dev --workspaces"
   },
   "devDependencies": {
