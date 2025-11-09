@@ -19,7 +19,7 @@ export function createServer(): {
 
   // Middleware
   app.use(express.json());
-  app.use(cookieParser());
+  app.use(cookieParser() as any);
   app.use(
     cors({
       origin: [
