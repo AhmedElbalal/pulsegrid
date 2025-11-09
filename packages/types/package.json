@@ -1,14 +1,32 @@
 {
-  "name": "@pulsegrid/types",
+  "name": "@pulsegrid/api",
   "version": "1.0.0",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc -b",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@pulsegrid/types": "1.0.0",
+    "@pulsegrid/utils": "1.0.0",
+    "express": "^4.19.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "socket.io": "^4.7.5",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "zod": "^3.23.8",
+    "@prisma/client": "^6.19.0"
   },
   "devDependencies": {
-    "typescript": "^5.6.3"
+    "prisma": "^6.19.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "@types/node": "^22.8.5",
+    "@types/express": "^4.17.25",
+    "@types/cors": "^2.8.19"
   }
 }

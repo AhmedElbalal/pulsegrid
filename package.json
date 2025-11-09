@@ -12,20 +12,29 @@
   ],
   "scripts": {
     "build": "npm run build --workspaces",
+    "dev": "npm run dev --workspaces",
     "build:types": "npm run build --workspace=@pulsegrid/types",
     "build:ui": "npm run build --workspace=@pulsegrid/ui",
     "build:utils": "npm run build --workspace=@pulsegrid/utils",
     "build:api": "npm run build --workspace=@pulsegrid/api",
     "build:dashboard": "npm run build --workspace=@pulsegrid/app-dashboard",
-    "build:reports": "npm run build --workspace=@pulsegrid/app-reports",
-    "dev": "npm run dev --workspaces"
+    "build:reports": "npm run build --workspace=@pulsegrid/app-reports"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/jest": "^30.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/supertest": "^6.0.3",
     "typescript": "^5.6.3"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
     "framer-motion": "^12.23.24",
+    "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.553.0",
-    "recharts": "^3.3.0"
+    "recharts": "^3.3.0",
+    "supertest": "^7.1.4"
   }
 }

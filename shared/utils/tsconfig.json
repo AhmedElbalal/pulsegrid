@@ -1,32 +1,17 @@
 {
   "compilerOptions": {
-    /* === Core settings === */
     "composite": true,
+    "target": "ES2022",
+    "module": "ESNext",
     "declaration": true,
-    "declarationMap": true,
     "outDir": "./dist",
     "rootDir": "./src",
-    /* === Module and target === */
-    "module": "ESNext",
-    "target": "ES2022",
     "moduleResolution": "node",
-    /* === Type safety & compatibility === */
     "strict": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    /* === React support (ignored if not React) === */
-    "jsx": "react-jsx",
-    /* === Output formatting === */
-    "sourceMap": true
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
   ]
 }
