@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc --outDir dist --skipLibCheck",
+    "build": "tsc --outDir dist --skipLibCheck --noEmit false",
     "start": "node dist/index.js"
   },
   "dependencies": {
@@ -20,13 +20,16 @@
     "cookie-parser": "^1.4.7",
     "zod": "^3.23.8",
     "@prisma/client": "^6.19.0",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "@types/node": "^22.8.5",
+    "@types/express": "^4.17.25",
+    "@types/cors": "^2.8.19",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.10"
   },
   "devDependencies": {
     "prisma": "^6.19.0",
-    "tsx": "^4.19.2",
-    "@types/node": "^22.8.5",
-    "@types/express": "^4.17.25",
-    "@types/cors": "^2.8.19"
+    "tsx": "^4.19.2"
   }
 }
