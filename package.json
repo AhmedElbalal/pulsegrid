@@ -2,7 +2,6 @@
   "name": "pulsegrid",
   "version": "1.0.0",
   "private": true,
-  "workspaces": false,
   "scripts": {
     "build": "npm run build --workspaces",
     "dev": "npm run dev --workspaces",
@@ -32,13 +31,5 @@
   },
   "railway": {
     "builder": "nixpacks"
-  },
-  "_originalWorkspaces": [
-    "shared/types",
-    "shared/utils",
-    "shared/ui",
-    "apps/dashboard",
-    "apps/reports",
-    "api"
-  ]
+  }
 }

@@ -1,0 +1,6 @@
+# .railwayignore
+api/types/
+apps/collab/
+packages/types/
+scripts/
+shell/

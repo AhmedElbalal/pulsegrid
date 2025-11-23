@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import type { EventInput } from '@pulsegrid/types';
+import type { EventInput } from '../types/index.js';
 import { Request, Response } from 'express';
 
 const prisma = new PrismaClient();
@@ -7,8 +7,8 @@ const prisma = new PrismaClient();
 export async function createEvent(e: EventInput) {
   try {
     // Handle timestamp conversion properly
-    const timestamp = e.timestamp 
-      ? new Date(e.timestamp) 
+    const timestamp = e.timestamp
+      ? new Date(e.timestamp)
       : new Date();
 
     const event = await prisma.event.create({
@@ -30,26 +30,26 @@ export async function createEvent(e: EventInput) {
 export const createEventRoute = async (req: Request, res: Response) => {
   try {
     const eventData: EventInput = req.body;
-    
+
     // Validate required fields
     if (!eventData.type || !eventData.userId) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
-        error: 'Missing required fields: type and userId' 
+        error: 'Missing required fields: type and userId'
       });
     }
 
     const event = await createEvent(eventData);
-    
+
     res.status(201).json({
       success: true,
       data: event
     });
   } catch (error) {
     console.error('Event creation error:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: 'Failed to create event' 
+      error: 'Failed to create event'
     });
   }
 };
@@ -61,16 +61,16 @@ export const getEventsRoute = async (req: Request, res: Response) => {
       orderBy: { timestamp: 'desc' },
       take: 100 // Limit results
     });
-    
+
     res.json({
       success: true,
       data: events
     });
   } catch (error) {
     console.error('Get events error:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: 'Failed to fetch events' 
+      error: 'Failed to fetch events'
     });
   }
 };
@@ -79,22 +79,22 @@ export const getEventsRoute = async (req: Request, res: Response) => {
 export const getEventsByUserRoute = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
-    
+
     const events = await prisma.event.findMany({
       where: { userId },
       orderBy: { timestamp: 'desc' },
       take: 50
     });
-    
+
     res.json({
       success: true,
       data: events
     });
   } catch (error) {
     console.error('Get user events error:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      error: 'Failed to fetch user events' 
+      error: 'Failed to fetch user events'
     });
   }
 };
