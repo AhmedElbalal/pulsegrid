@@ -1,5 +1,14 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@pulsegrid/types": [
+        "./node_modules/@pulsegrid/types"
+      ],
+      "@pulsegrid/utils": [
+        "./node_modules/@pulsegrid/utils"
+      ]
+    },
     "composite": true,
     "target": "ES2022",
     "module": "NodeNext",
