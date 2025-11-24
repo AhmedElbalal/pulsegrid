@@ -1,5 +1,5 @@
 [build]
-  command = "cd apps/dashboard && npm run build"
+  command = "npm install && npm run build:dashboard"
   publish = "apps/dashboard/dist"
 
 [build.environment]

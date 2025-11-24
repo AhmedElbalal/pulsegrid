@@ -2,6 +2,11 @@
   "name": "pulsegrid",
   "version": "1.0.0",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "shared/*"
+  ],
   "scripts": {
     "build": "npm run build --workspaces",
     "dev": "npm run dev --workspaces",
