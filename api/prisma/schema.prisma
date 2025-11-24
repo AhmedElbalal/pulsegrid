@@ -18,7 +18,7 @@ model User {
 
 model Report {
   id        String   @id @default(cuid())
-  title     String   // Changed from 'name' to 'title' to match your code
+  title     String
   eventType String?
   createdAt DateTime @default(now())
   userId    String
@@ -27,9 +27,9 @@ model Report {
 
 model Event {
   id        String   @id @default(cuid())
-  timestamp DateTime @default(now())  // Changed from 'ts' to 'timestamp' to match your code
+  timestamp DateTime @default(now())
   type      String
-  metadata  Json?    // Changed from 'props' to 'metadata' to match your code
+  metadata  Json?
   userId    String
   user      User?    @relation("EventUser", fields: [userId], references: [id])
   createdAt DateTime @default(now())
