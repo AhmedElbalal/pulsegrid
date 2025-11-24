@@ -1,0 +1,6 @@
+[build]
+  command = "cd apps/dashboard && npm run build"
+  publish = "apps/dashboard/dist"
+
+[build.environment]
+  NODE_VERSION = "18"
