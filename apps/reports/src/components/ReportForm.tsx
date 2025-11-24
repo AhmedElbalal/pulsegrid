@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "@pulsegrid/ui";
 import { toCsv } from "@pulsegrid/utils";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:3001";
+const API = import.meta.env.VITE_API_URL || "https://pulsegrid-1.onrender.com";
 
 export default function ReportForm() {
   const [token, setToken] = useState("");

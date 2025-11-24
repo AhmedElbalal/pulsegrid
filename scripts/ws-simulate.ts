@@ -1,7 +1,7 @@
 import "dotenv/config";
 import fetch from "node-fetch";
 
-const API = process.env.API_URL || "http://localhost:3001";
+const API = process.env.API_URL || "https://pulsegrid-1.onrender.com";
 async function tick() {
   const now = new Date().toISOString();
   const body = [
