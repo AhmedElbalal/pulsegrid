@@ -1,0 +1,102 @@
+Folder PATH listing
+Volume serial number is 000001DC AEC1:03B5
+C:.
+³   .env.example
+³   docker-compose.yml
+³   package.json
+³   project_structure.txt
+³   turbo.json
+³   
+ÃÄÄÄ.github
+³   ÀÄÄÄworkflows
+³           ci.yml
+³           
+ÃÄÄÄapi
+³   ³   .env.example
+³   ³   package.json
+³   ³   tsconfig.json
+³   ³   
+³   ÀÄÄÄsrc
+³       ³   auth.ts
+³       ³   collab.ts
+³       ³   events.ts
+³       ³   index.ts
+³       ³   reports.ts
+³       ³   socket.ts
+³       ³   
+³       ÀÄÄÄtests
+³               api.test.ts
+³               
+ÃÄÄÄapps
+³   ÃÄÄÄcollab
+³   ³   ³   index.html
+³   ³   ³   package.json
+³   ³   ³   tsconfig.json
+³   ³   ³   vite.config.ts
+³   ³   ³   
+³   ³   ÀÄÄÄsrc
+³   ³           App.tsx
+³   ³           CollabRoom.tsx
+³   ³           main.tsx
+³   ³           Presence.tsx
+³   ³           
+³   ÃÄÄÄdashboard
+³   ³   ³   index.html
+³   ³   ³   package.json
+³   ³   ³   tsconfig.json
+³   ³   ³   vite.config.ts
+³   ³   ³   
+³   ³   ÀÄÄÄsrc
+³   ³       ³   App.tsx
+³   ³       ³   Charts.tsx
+³   ³       ³   Dashboard.tsx
+³   ³       ³   main.tsx
+³   ³       ³   
+³   ³       ÀÄÄÄtests
+³   ³               dashboard.test.tsx
+³   ³               
+³   ÀÄÄÄreports
+³       ³   index.html
+³       ³   package.json
+³       ³   tsconfig.json
+³       ³   vite.config.ts
+³       ³   
+³       ÀÄÄÄsrc
+³               App.tsx
+³               main.tsx
+³               ReportBuilder.tsx
+³               ReportViewer.tsx
+³               
+ÃÄÄÄinfra
+³   ÀÄÄÄterraform
+³           main.tf
+³           outputs.tf
+³           README.md
+³           variables.tf
+³           
+ÃÄÄÄprisma
+³   ³   schema.prisma
+³   ³   
+³   ÀÄÄÄmigrations
+³           jest.config.js
+³           
+ÃÄÄÄscripts
+³       seed.ts
+³       ws-simulate.ts
+³       
+ÃÄÄÄshared
+³   ÃÄÄÄtypes
+³   ÃÄÄÄui
+³   ÀÄÄÄutils
+ÀÄÄÄshell
+    ³   index.html
+    ³   package.json
+    ³   ts.config.json
+    ³   vite.config.ts
+    ³   
+    ÀÄÄÄsrc
+            App.tsx
+            AuthProvider.tsx
+            main.tsx
+            vite-env.d.ts
+            
